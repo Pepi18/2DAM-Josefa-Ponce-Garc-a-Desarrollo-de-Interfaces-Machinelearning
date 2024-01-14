@@ -9,6 +9,9 @@
                 patrones[0].src = "vertical.png";
                 patrones[1] = new Image();
                 patrones[1].src = "horizontal.png";
+                var cuentapatrones = []
+                cuentapatrones[0] = 0
+                cuentapatrones[1] = 0
                 //Cargamosel contexto del lienzo1
                 var contexto = document.getElementById("lienzo").getContext("2d");
                 //Cargamos el contexto del lienzo2
@@ -21,7 +24,7 @@
                 //Creo una nueva imagen en la memoria de Javascript
                 let imagen = new Image();
                 //Cargo la imagen que tengo en el disco duro
-                imagen.src = "cuadrado.jpg"
+                imagen.src = "cara.jpg"
                 //Espero a que cargue la imagen, y ejecuto la siguiente función
                 imagen.onload = function() {
                     //Pinto las referencias
@@ -66,7 +69,8 @@
                             for(let i= 0;i<trozo.data.length;i+=4){
                                 suma += Math.abs(trozo.data[i] - muestravertical.data[i])
                             }
-                            if(suma < 2300){
+                            if(suma < 2700){
+                                cuentapatrones[0]++
                                 contexto3.fillStyle = "red";
                                 contexto3.fillRect(x,y,2,2)
                             }
@@ -82,13 +86,15 @@
                             for(let i= 0;i<trozo.data.length;i+=4){
                                 suma += Math.abs(trozo.data[i] - muestrahorizontal.data[i])
                             }
-                            if(suma < 2300){
+                            if(suma < 2700){
+                                cuentapatrones[1]++
                                 contexto3.fillStyle = "blue";
                                 contexto3.fillRect(x,y,2,2)
                             }
                         }
 
                     }
+                    console.log(cuentapatrones);
                                         
                 }
                 
