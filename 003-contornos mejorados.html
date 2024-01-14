@@ -3,23 +3,31 @@
     <head>
         <script>
             window.onload = function() {
+                //Cargamosel contexto del lienzo1
                 var contexto = document.getElementById("lienzo").getContext("2d");
+                //Cargamos el contexto del lienzo2
                 var contexto2 = document.getElementById("lienzo2").getContext("2d");
+                //Creo una nueva imagen en la memoria de Javascript
                 let imagen = new Image();
+                //Cargo la imagen que tengo en el disco duro
                 imagen.src = "mano3.jpg"
+                //Espero a que cargue la imagen, y ejecuto la siguiente función
                 imagen.onload = function() {
-                    //primero pinto la imagen original
+                    //primero pinto la imagen original en el lienzo original
                     contexto.drawImage(imagen,0,0);
-                    contexto2.fillStyle = "white";
-                    contexto2.fillRect(0,0,512,512);
-                    //detectamos bordes en la imagen linea por linea (en horizontal)
+                    //detectamos bordes en la imagen linea por linea
+                    //Cargamos la imagen 1 en memoria
                     let imagenlienzo1 = contexto.getImageData(0,0,512,512);
+                    //Cargamos la imagen 2 en memoria
                     let imagenlienzo2 = contexto2.getImageData(0,0,512,512);
-                    //Recorre la imagen pixel a pixel
+                    //Para cada uno de los píxeles de la imagen
                     for(let i = 0; i < imagenlienzo1.data.length; i+=4){
+                        //Diferencia horizontal del canal rojo
                         let diferencia = Math.abs(imagenlienzo1.data[i] - imagenlienzo1.data[i+4])
-                        //Si la diferencia es mayor que 10 pinta un pixel negro
-                        if(diferencia > 10){
+                        //Diferencia en vertical del canal rojo
+                        let diferencia2 = Math.abs(imagenlienzo1.data[i] - imagenlienzo1.data[i+512*4])
+                        //Si la diferencia es notable pinta un pixel negro
+                        if(diferencia > 10 || diferencia2 > 10){
                             imagenlienzo2.data[i]=0;
                             imagenlienzo2.data[i+1]=0;
                             imagenlienzo2.data[i+2]=0;
