@@ -31,8 +31,9 @@
                 var contextodiagonal2 = document.getElementById("lienzodiagonal2").getContext("2d");
                 //Creo una nueva imagen en la memoria de Javascript
                 let imagen = new Image();
+                imagen.crossOrigin = "Anonymous";
                 //Cargo la imagen que tengo en el disco duro
-                imagen.src = "cara.jpg"
+                imagen.src = "cara.jpg";
                 //Espero a que cargue la imagen, y ejecuto la siguiente función
                 imagen.onload = function() {
                     //Pinto las referencias
@@ -145,7 +146,12 @@
                     }
                     console.log(cuentapatrones)
                     let guarda = JSON.stringify(cuentapatrones)
-                    fetch("guardajson.php?patron=cara&datos="+guarda)                   
+                    console.log("Patron: cara")
+                    console.log("Datos: " + guarda)
+                    fetch("guardajson2.php?patron=cara&datos="+guarda)
+                    .then(response => response.text())
+                    .then(data => console.log(data))
+                    .catch(error => console.log('Error:', error));                   
                 }
             }
         </script>
